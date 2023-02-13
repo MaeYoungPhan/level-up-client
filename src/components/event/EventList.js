@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { getEvents } from "../../managers/EventManager.js"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 export const EventList = (props) => {
     const navigate = useNavigate()
@@ -24,6 +24,7 @@ export const EventList = (props) => {
                         <h3 className="event__name">{event.name}</h3>
                         <div className="event__date">Date: {event.date} </div>
                         <div className="event__time">Time: {event.time} </div>
+                        <button><Link to={`/events/edit/${event.id}`}>Edit Event</Link></button>
                     </section>
                 })
             }
