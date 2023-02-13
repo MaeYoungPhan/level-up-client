@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from "react"
+import { useNavigate, Link } from 'react-router-dom'
 import { getGames } from "../../managers/GameManager.js"
 
 export const GameList = (props) => {
@@ -24,6 +24,7 @@ export const GameList = (props) => {
                         return <section key={`game--${game.id}`} className="game">
                             <h3 className="game__name">{game.name}</h3>
                             <div className="game__players">up to {game.max_players} players </div>
+                            <button><Link to={`/games/edit/${game.id}`}>Edit Game</Link></button>
                         </section>
                     })
                 }
