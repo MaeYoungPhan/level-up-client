@@ -1,14 +1,24 @@
 import { useEffect, useState } from "react"
-import { getEvents } from "../../managers/EventManager.js"
+import { getEvents, deleteEvent } from "../../managers/EventManager.js"
 import { useNavigate, Link } from "react-router-dom"
 
 export const EventList = (props) => {
     const navigate = useNavigate()
     const [ events, setEvents ] = useState([])
 
-    useEffect(() => {
+    const getAllEvents = () => {
         getEvents().then(data => setEvents(data))
+    }
+
+    useEffect(() => {
+        getAllEvents()
     }, [])
+
+    const handleDelete = (id) => {
+        deleteEvent(id).then(() => {
+            {getAllEvents()}
+             }) 
+    }
 
     return (
         <>
@@ -25,6 +35,10 @@ export const EventList = (props) => {
                         <div className="event__date">Date: {event.date} </div>
                         <div className="event__time">Time: {event.time} </div>
                         <button><Link to={`/events/edit/${event.id}`}>Edit Event</Link></button>
+                        <button className="btn btn-2 btn-sep icon-create"
+            onClick={() => {
+                handleDelete(event.id)
+            }}>Delete Event</button>
                     </section>
                 })
             }
